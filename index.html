@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meteorz - Sideloading</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+    }
+    .tabs {
+        display: flex;
+        background-color: #111;
+        overflow-x: auto;
+    }
+    .tab {
+        flex: 1;
+        text-align: center;
+        padding: 15px;
+        cursor: pointer;
+        background-color: #111;
+        color: white;
+        border-bottom: 3px solid transparent;
+        transition: 0.3s;
+    }
+    .tab:hover, .tab.active {
+        background-color: #222;
+        border-bottom: 3px solid white;
+    }
+    .tab-content {
+        display: none;
+        padding: 20px;
+    }
+    .tab-content.active {
+        display: block;
+    }
+    .dns-card {
+        display: flex;
+        align-items: center;
+        background-color: #1a1a1a;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        justify-content: space-between;
+    }
+    .dns-info {
+        display: flex;
+        align-items: center;
+    }
+    .dns-info img {
+        width: 60px;
+        height: 60px;
+        border-radius: 5px;
+        margin-right: 15px;
+    }
+    .dns-text h3 {
+        margin: 0;
+        font-size: 16px;
+    }
+    .dns-text p {
+        margin: 0;
+        color: #ccc;
+        font-size: 14px;
+    }
+    .get-btn {
+        background-color: white;
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    .get-btn:hover {
+        background-color: #ddd;
+    }
+</style>
+</head>
+<body>
+
+<!-- Tabs -->
+<div class="tabs">
+    <div class="tab active" onclick="openTab(event, 'dns')">DNS</div>
+    <div class="tab" onclick="openTab(event, 'certs')">Certificates</div>
+    <div class="tab" onclick="openTab(event, 'apps')">Apps</div>
+    <div class="tab" onclick="openTab(event, 'info')">Info</div>
+</div>
+
+<!-- DNS Tab -->
+<div id="dns" class="tab-content active">
+    <div class="dns-card">
+        <div class="dns-info">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="DNS">
+            <div class="dns-text">
+                <h3>Qstatic DNS</h3>
+                <p>11/10 Success</p>
+            </div>
+        </div>
+        <a class="get-btn" href="https://github.com/char843vvv/qstaticdns/releases/download/dns/qstaticdns.mobileconfig">Get</a>
+    </div>
+
+    <div class="dns-card">
+        <div class="dns-info">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="dns-text">
+                <h3>Khoindvn</h3>
+                <p>10/10 Success</p>
+            </div>
+        </div>
+        <a class="get-btn" href="https://github.com/khoindvnDNS/iOS/raw/main/DNS/khoindns.mobileconfig">Get</a>
+    </div>
+
+    <div class="dns-card">
+        <div class="dns-info">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="dns-text">
+                <h3>Khomod DNS</h3>
+                <p>11/10 Success</p>
+            </div>
+        </div>
+        <a class="get-btn" href="https://raw.githubusercontent.com/toasty-dev/Khomod/refs/heads/main/khomodver2.mobileconfig">Get</a>
+    </div>
+
+    <div class="dns-card">
+        <div class="dns-info">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="dns-text">
+                <h3>Anti Revoke DNS</h3>
+                <p>10/10 Success</p>
+            </div>
+        </div>
+        <a class="get-btn" href="https://github.com/toasty-dev/Khomod/raw/7401ca4719c9080a96ee902f800ebf009f08912b/khomod.mobileconfig">Get</a>
+    </div>
+
+    <div class="dns-card">
+        <div class="dns-info">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="dns-text">
+                <h3>CLS DNS</h3>
+                <p>10/10 Success</p>
+            </div>
+        </div>
+        <a class="get-btn" href="https://cdn.discordapp.com/attachments/1195472555071516775/1278801685476540466/CSLdns.mobileconfig?ex=66d2c920&is=66d177a0&hm=df7d8dc5f0d9be64f4b200c65b3c866ec6f91189c73f0946f9984477012e1695&">Get</a>
+    </div>
+
+    <div class="dns-card">
+        <div class="dns-info">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="dns-text">
+                <h3>Spartan DNS</h3>
+                <p>9/10 Success</p>
+            </div>
+        </div>
+        <a class="get-btn" href="https://raw.githubusercontent.com/geololll/VyperHub/main/VyperHubs.mobileconfig">Get</a>
+    </div>
+</div>
+
+<!-- Placeholder tabs -->
+<div id="certs" class="tab-content">
+    <h2>Certificates</h2>
+</div>
+<div id="apps" class="tab-content">
+    <h2>Apps</h2>
+</div>
+<div id="info" class="tab-content">
+    <h2>Info</h2>
+</div>
+
+<script>
+function openTab(evt, tabId) {
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    evt.currentTarget.classList.add('active');
+}
+</script>
+
+</body>
+          </html>
