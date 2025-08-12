@@ -5,15 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meteorz - Sideloading</title>
 <style>
+    /* Base styling */
     body {
-        font-family: Arial, sans-serif;
-        background-color: #000;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #000000, #1a1a1a);
         color: #fff;
         margin: 0;
+        overflow-x: hidden;
     }
+
+    /* Tabs */
     .tabs {
         display: flex;
-        background-color: #111;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 0 15px rgba(255,255,255,0.1);
         overflow-x: auto;
     }
     .tab {
@@ -21,31 +27,55 @@
         text-align: center;
         padding: 15px;
         cursor: pointer;
-        background-color: #111;
         color: white;
-        border-bottom: 3px solid transparent;
-        transition: 0.3s;
+        position: relative;
+        font-weight: bold;
+        letter-spacing: 1px;
+        transition: all 0.4s ease;
     }
-    .tab:hover, .tab.active {
-        background-color: #222;
-        border-bottom: 3px solid white;
+    .tab.active {
+        background: rgba(255,255,255,0.08);
+        box-shadow: inset 0 -3px white;
     }
+    .tab:hover {
+        background: rgba(255,255,255,0.15);
+        transform: scale(1.05);
+    }
+
+    /* Content animation */
     .tab-content {
         display: none;
         padding: 20px;
+        animation: fadeSlide 0.5s ease forwards;
     }
     .tab-content.active {
         display: block;
     }
+    @keyframes fadeSlide {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* DNS Cards - futuristic look */
     .dns-card {
         display: flex;
         align-items: center;
-        background-color: #1a1a1a;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 8px;
         justify-content: space-between;
+        background: rgba(255,255,255,0.05);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 15px;
+        box-shadow: 0 0 10px rgba(255,255,255,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    .dns-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 0 25px rgba(255,255,255,0.2);
+    }
+
+    /* DNS info */
     .dns-info {
         display: flex;
         align-items: center;
@@ -53,8 +83,9 @@
     .dns-info img {
         width: 60px;
         height: 60px;
-        border-radius: 5px;
+        border-radius: 10px;
         margin-right: 15px;
+        border: 2px solid rgba(255,255,255,0.2);
     }
     .dns-text h3 {
         margin: 0;
@@ -62,19 +93,25 @@
     }
     .dns-text p {
         margin: 0;
-        color: #ccc;
+        color: #aaa;
         font-size: 14px;
     }
+
+    /* Get Button */
     .get-btn {
-        background-color: white;
+        background: linear-gradient(90deg, #fff, #aaa);
         color: black;
         padding: 8px 16px;
         text-decoration: none;
-        border-radius: 5px;
+        border-radius: 6px;
         font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 10px rgba(255,255,255,0.1);
     }
     .get-btn:hover {
-        background-color: #ddd;
+        background: white;
+        box-shadow: 0 0 20px rgba(255,255,255,0.5);
+        transform: scale(1.05);
     }
 </style>
 </head>
@@ -90,9 +127,10 @@
 
 <!-- DNS Tab -->
 <div id="dns" class="tab-content active">
+    <!-- 1 -->
     <div class="dns-card">
         <div class="dns-info">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="DNS">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
             <div class="dns-text">
                 <h3>Qstatic DNS</h3>
                 <p>11/10 Success</p>
@@ -101,6 +139,7 @@
         <a class="get-btn" href="https://github.com/char843vvv/qstaticdns/releases/download/dns/qstaticdns.mobileconfig">Get</a>
     </div>
 
+    <!-- 2 -->
     <div class="dns-card">
         <div class="dns-info">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
@@ -112,6 +151,7 @@
         <a class="get-btn" href="https://github.com/khoindvnDNS/iOS/raw/main/DNS/khoindns.mobileconfig">Get</a>
     </div>
 
+    <!-- 3 -->
     <div class="dns-card">
         <div class="dns-info">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
@@ -123,6 +163,7 @@
         <a class="get-btn" href="https://raw.githubusercontent.com/toasty-dev/Khomod/refs/heads/main/khomodver2.mobileconfig">Get</a>
     </div>
 
+    <!-- 4 -->
     <div class="dns-card">
         <div class="dns-info">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
@@ -134,6 +175,7 @@
         <a class="get-btn" href="https://github.com/toasty-dev/Khomod/raw/7401ca4719c9080a96ee902f800ebf009f08912b/khomod.mobileconfig">Get</a>
     </div>
 
+    <!-- 5 -->
     <div class="dns-card">
         <div class="dns-info">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
@@ -142,9 +184,10 @@
                 <p>10/10 Success</p>
             </div>
         </div>
-        <a class="get-btn" href="https://cdn.discordapp.com/attachments/1195472555071516775/1278801685476540466/CSLdns.mobileconfig?ex=66d2c920&is=66d177a0&hm=df7d8dc5f0d9be64f4b200c65b3c866ec6f91189c73f0946f9984477012e1695&">Get</a>
+        <a class="get-btn" href="https://cdn.discordapp.com/attachments/1195472555071516775/1278801685476540466/CSLdns.mobileconfig">Get</a>
     </div>
 
+    <!-- 6 -->
     <div class="dns-card">
         <div class="dns-info">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
@@ -178,4 +221,4 @@ function openTab(evt, tabId) {
 </script>
 
 </body>
-          </html>
+</html>
