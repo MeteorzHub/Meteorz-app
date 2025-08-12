@@ -1,378 +1,394 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Meteorz Sideloading — Black & White</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Meteorz Sideloading</title>
 <style>
-  :root{
-    --bg:#000;
-    --panel:#0f0f0f;
-    --muted:#1b1b1b;
-    --text:#fff;
-    --accent:#fff;
-    --card-border:#2b2b2b;
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
   }
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:Inter,Segoe UI,Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    -webkit-font-smoothing:antialiased;
+  body {
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  header{
-    background:linear-gradient(180deg,#0b0b0b, #0f0f0f);
-    padding:18px 16px;
-    text-align:center;
-    border-bottom:1px solid var(--card-border);
+  header {
+    background: #111;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid #222;
   }
-  header h1{margin:0;font-size:20px;letter-spacing:0.6px}
-  .topbar{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    padding:12px;
-    background:transparent;
-    flex-wrap:wrap;
+  nav {
+    display: flex;
+    justify-content: center;
+    background: #111;
+    border-bottom: 1px solid #222;
   }
-  .tab-btn{
-    background:transparent;
-    color:var(--text);
-    border:1px solid var(--card-border);
-    padding:10px 14px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:600;
+  nav button {
+    background: transparent;
+    border: none;
+    color: #bbb;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 14px 26px;
+    cursor: pointer;
+    transition: color 0.25s ease;
+    letter-spacing: 0.04em;
   }
-  .tab-btn.active{
-    background:var(--text);
-    color:var(--bg);
-    border-color:#fff;
+  nav button:hover,
+  nav button.active {
+    color: #fff;
+    border-bottom: 3px solid #fff;
   }
-
-  main{padding:18px; max-width:1200px; margin:0 auto;}
-  .grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:flex-start}
-  .card{
-    background:var(--panel);
-    border:1px solid var(--card-border);
-    width:260px;
-    padding:14px;
-    border-radius:10px;
-    text-align:center;
+  main {
+    max-width: 1100px;
+    margin: 24px auto 40px;
+    padding: 0 16px;
   }
-  .thumb{
-    width:100px;height:100px;margin:6px auto 10px;border-radius:8px;
-    object-fit:cover;border:1px solid #222;background:#000;
+  section {
+    display: none;
   }
-  .title{font-size:14px;font-weight:700;margin:6px 0}
-  .sub{font-size:12px;color:#cfcfcf;margin-bottom:10px}
-  .get-btn{
-    display:inline-block;
-    padding:9px 12px;
-    background:var(--accent);
-    color:var(--bg);
-    font-weight:700;
-    border-radius:8px;
-    text-decoration:none;
-    border:none;
-    cursor:pointer;
+  section.active {
+    display: block;
   }
-  .status{font-size:12px;margin-top:8px;color:#bfbfbf}
-  .note{font-size:12px;color:#999;margin-top:6px}
-
-  /* responsive */
-  @media (max-width:720px){
-    .card{width:48%}
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
   }
-  @media (max-width:420px){
-    .card{width:100%}
-    .topbar{padding:8px}
+  .card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 10px;
+    width: 260px;
+    padding: 18px 16px 24px;
+    box-shadow: 0 0 10px #222;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
   }
-
-  /* container sections hidden by JS */
-  .section{display:none}
-  .section.active{display:block}
-  hr.sep{border:none;border-top:1px solid #131313;margin:18px 0}
+  .card:hover {
+    box-shadow: 0 0 20px #555;
+  }
+  .card img.thumb {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1px solid #222;
+  }
+  .card .title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    min-height: 48px;
+  }
+  .card .sub {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+    min-height: 20px;
+  }
+  .card a.get-btn {
+    display: inline-block;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    padding: 10px 22px;
+    font-weight: 700;
+    border-radius: 8px;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+  .card a.get-btn:hover {
+    background: #ddd;
+  }
+  .status {
+    font-size: 0.85rem;
+    margin-top: 8px;
+    color: #888;
+    font-style: italic;
+  }
+  /* Responsive */
+  @media (max-width: 700px) {
+    .grid {
+      justify-content: center;
+    }
+    .card {
+      width: 45vw;
+    }
+  }
+  @media (max-width: 420px) {
+    .card {
+      width: 90vw;
+    }
+    nav {
+      flex-wrap: wrap;
+    }
+    nav button {
+      flex: 1 1 33%;
+      padding: 12px 0;
+      font-size: 1rem;
+    }
+  }
 </style>
 <script>
-  function setActiveTab(id, btn){
-    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    // small scroll to top of main
-    window.scrollTo({top:0,behavior:'smooth'});
+  function switchTab(tabName) {
+    document.querySelectorAll('nav button').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabName);
+    });
+    document.querySelectorAll('main section').forEach(sec => {
+      sec.classList.toggle('active', sec.id === tabName);
+    });
   }
-  window.addEventListener('DOMContentLoaded',()=> {
-    // default tab DNS
-    const firstBtn = document.querySelector('.tab-btn[data-target="dns"]');
-    if(firstBtn) firstBtn.click();
+  document.addEventListener('DOMContentLoaded', () => {
+    switchTab('dns'); // default tab on load
+    document.querySelectorAll('nav button').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
   });
 </script>
 </head>
 <body>
-<header>
-  <h1>Meteorz Sideloading — Black & White Theme</h1>
-</header>
 
-<div class="topbar" role="navigation" aria-label="tabs">
-  <button class="tab-btn" data-target="dns" onclick="setActiveTab('dns', this)">DNS</button>
-  <button class="tab-btn" data-target="direct" onclick="setActiveTab('direct', this)">Direct Installs</button>
-  <button class="tab-btn" data-target="certificates" onclick="setActiveTab('certificates', this)">Certificates</button>
-</div>
+<header>Meteorz Sideloading</header>
+
+<nav aria-label="Primary navigation tabs">
+  <button data-tab="dns" aria-controls="dns" aria-selected="true" role="tab" tabindex="0">DNS</button>
+  <button data-tab="direct" aria-controls="direct" role="tab" tabindex="-1">Direct Installs</button>
+  <button data-tab="certificates" aria-controls="certificates" role="tab" tabindex="-1">Certificates</button>
+</nav>
 
 <main>
-  <!-- DNS SECTION -->
-  <section id="dns" class="section" aria-label="DNS servers">
-    <h2 style="margin-top:0">DNS — 6 entries</h2>
+  <section id="dns" role="tabpanel" tabindex="0" aria-labelledby="dns-tab">
     <div class="grid">
-      <div class="card">
-        <img class="thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Qstatic DNS">
+
+      <article class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Qstatic DNS" class="thumb" />
         <div class="title">Qstatic DNS</div>
         <div class="sub">11/10 Success</div>
-        <a class="get-btn" href="https://github.com/char843vvv/qstaticdns/releases/download/dns/qstaticdns.mobileconfig" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://github.com/char843vvv/qstaticdns/releases/download/dns/qstaticdns.mobileconfig" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Khoindvn DNS">
+      <article class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Khoindvn DNS" class="thumb" />
         <div class="title">Khoindvn</div>
         <div class="sub">10/10 Success</div>
-        <a class="get-btn" href="https://github.com/khoindvnDNS/iOS/raw/main/DNS/khoindns.mobileconfig" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://github.com/khoindvnDNS/iOS/raw/main/DNS/khoindns.mobileconfig" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Khomod DNS">
+      <article class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Khomod DNS" class="thumb" />
         <div class="title">Khomod DNS</div>
         <div class="sub">11/10 Success</div>
-        <a class="get-btn" href="https://raw.githubusercontent.com/toasty-dev/Khomod/refs/heads/main/khomodver2.mobileconfig" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://raw.githubusercontent.com/toasty-dev/Khomod/refs/heads/main/khomodver2.mobileconfig" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Anti Revoke DNS">
+      <article class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Anti Revoke DNS" class="thumb" />
         <div class="title">Anti Revoke DNS</div>
         <div class="sub">10/10 Success</div>
-        <a class="get-btn" href="https://github.com/toasty-dev/Khomod/raw/7401ca4719c9080a96ee902f800ebf009f08912b/khomod.mobileconfig" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://github.com/toasty-dev/Khomod/raw/7401ca4719c9080a96ee902f800ebf009f08912b/khomod.mobileconfig" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="CLS DNS">
+      <article class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="CLS DNS" class="thumb" />
         <div class="title">CLS DNS</div>
         <div class="sub">10/10 Success</div>
-        <a class="get-btn" href="https://cdn.discordapp.com/attachments/1195472555071516775/1278801685476540466/CSLdns.mobileconfig?ex=66d2c920&is=66d177a0&hm=df7d8dc5f0d9be64f4b200c65b3c866ec6f91189c73f0946f9984477012e1695&" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://cdn.discordapp.com/attachments/1195472555071516775/1278801685476540466/CSLdns.mobileconfig?ex=66d2c920&is=66d177a0&hm=df7d8dc5f0d9be64f4b200c65b3c866ec6f91189c73f0946f9984477012e1695&" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Spartan DNS">
+      <article class="card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Spartan DNS" class="thumb" />
         <div class="title">Spartan DNS</div>
         <div class="sub">9/10 Success</div>
-        <a class="get-btn" href="https://raw.githubusercontent.com/geololll/VyperHub/main/VyperHubs.mobileconfig" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://raw.githubusercontent.com/geololll/VyperHub/main/VyperHubs.mobileconfig" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+    </div>
+  </section>
+  <section id="direct" role="tabpanel" tabindex="0" aria-labelledby="direct-tab">
+    <div class="grid">
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Esign China Zheshang Bank Co., Ltd" class="thumb" />
+        <div class="title">Esign China Zheshang Bank Co., Ltd.zip</div>
+        <div class="status live">live ✅️</div>
+        <a href="https://sign.applep12.com/Install/689bfa36-61f1-9501-00ec-f1704ddf2d06" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign GAC TOYOTA MOTOR CO.,LTD" class="thumb" />
+        <div class="title">ESign GAC TOYOTA MOTOR CO.,LTD</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/55ZWv8OZ" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign Wuling Power Corporation" class="thumb" />
+        <div class="title">ESign Wuling Power Corporation</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/zBXxhRoc" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign TCL household Appliance Marketing Co., LTD" class="thumb" />
+        <div class="title">ESign TCL household Appliance Marketing Co., LTD</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/pokXH5G4" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign China Railway Eryuan Engineering Group Co., Ltd" class="thumb" />
+        <div class="title">ESign China Railway Eryuan Engineering Group Co., Ltd</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/TM5Ye1O1" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign EEO Education Ltd." class="thumb" />
+        <div class="title">ESign EEO Education Ltd.</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/Rod6cWdW" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD." class="thumb" />
+        <div class="title">ESign NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD.</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/ZQgRwTtA" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign Beijing Esensoft Co., Ltd." class="thumb" />
+        <div class="title">ESign Beijing Esensoft Co., Ltd.</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/8FnyqEjs" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign Chiba Institute of Technology" class="thumb" />
+        <div class="title">ESign Chiba Institute of Technology</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/NRqDTAah" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign VIETTEL GROUP" class="thumb" />
+        <div class="title">ESign VIETTEL GROUP</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/vnjes8ios" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE" class="thumb" />
+        <div class="title">ESign VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/vnjes8ios" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
+      <article class="card">
+        <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="ESign BMW Brilliance Automotive Ltd." class="thumb" />
+        <div class="title">ESign BMW Brilliance Automotive Ltd.</div>
+        <div class="status revoked">Revoked — use DNS</div>
+        <a href="https://loadly.io/KDxT6fCO" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
     </div>
   </section>
 
-  <hr class="sep">
-
-  <!-- DIRECT INSTALLS SECTION -->
-  <section id="direct" class="section" aria-label="Direct installs">
-    <h2 style="margin-top:0">Direct Installs (was "Apps") — all entries filled</h2>
+  <section id="certificates" role="tabpanel" tabindex="0" aria-labelledby="certificates-tab">
     <div class="grid">
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Esign - China Zheshang">
-        <div class="title">Esign — China Zheshang Bank Co., Ltd.zip</div>
-        <div class="sub">Live ✅</div>
-        <a class="get-btn" href="https://sign.applep12.com/Install/689bfa36-61f1-9501-00ec-f1704ddf2d06" target="_blank" rel="noopener">Get</a>
-        <div class="status">Direct install (open link on iPhone)</div>
-      </div>
 
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="GAC TOYOTA">
-        <div class="title">ESign — GAC TOYOTA MOTOR CO.,LTD</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="https://loadly.io/55ZWv8OZ" target="_blank" rel="noopener">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Wuling Power">
-        <div class="title">ESign — Wuling Power Corporation</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="https://loadly.io/zBXxhRoc" target="_blank" rel="noopener">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="TCL household">
-        <div class="title">ESign — TCL household Appliance Marketing Co., LTD</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="https://loadly.io/pokXH5G4" target="_blank" rel="noopener">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="China Railway Eryuan">
-        <div class="title">ESign — China Railway Eryuan Engineering Group Co., Ltd</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="https://loadly.io/TM5Ye1O1" target="_blank" rel="noopener">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="EEO Education">
-        <div class="title">ESign — EEO Education Ltd.</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="https://loadly.io/Rod6cWdW" target="_blank" rel="noopener">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="NREH Estate">
-        <div class="title">ESign — NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD.</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="https://loadly.io/ZQgRwTtA" target="_blank" rel="noopener">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Beijing Esensoft">
-        <div class="title">ESign — Beijing Esensoft Co., Ltd.</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="https://loadly.io/8FnyqEjs" target="_blank" rel="noopener">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Chiba Institute">
-        <div class="title">ESign — CHIBA INSTITUTE OF TECHNOLOGY</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="https://loadly.io/NRqDTAah" target="_blank" rel="noopener">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Viettel Group">
-        <div class="title">ESign — VIETTEL GROUP</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="#" onclick="alert('This entry marked revoked — use DNS. Open DNS tab for installers.'); return false;">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Vietnam Joint Bank">
-        <div class="title">ESign — VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="https://loadly.io/vnjes8ios" target="_blank" rel="noopener">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-
-      <div class="card">
-        <img class="thumb" src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="BMW Brilliance">
-        <div class="title">ESign — BMW Brilliance Automotive Ltd.</div>
-        <div class="sub">Revoked — use DNS</div>
-        <a class="get-btn" href="https://loadly.io/KDxT6fCO" target="_blank" rel="noopener">Get</a>
-        <div class="status">Revoked — DNS recommended</div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="sep">
-
-  <!-- CERTIFICATES SECTION -->
-  <section id="certificates" class="section" aria-label="Certificates">
-    <h2 style="margin-top:0">Certificates — all provided links</h2>
-    <div class="grid">
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="China Zheshang">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="China Zheshang Bank Co., Ltd" class="thumb" />
         <div class="title">China Zheshang Bank Co., Ltd</div>
-        <div class="sub">Mediafire ZIP</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/uqf4gjnb3z8kao2/China+Zheshang+Bank+Co.,+Ltd.zip/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/uqf4gjnb3z8kao2/China+Zheshang+Bank+Co.,+Ltd.zip/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="Wuling Power Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="Wuling Power Corporation" class="thumb" />
         <div class="title">Wuling Power Corporation</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/dr9h0niwrtd0m5z/Wuling_Power_Corporation.esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/dr9h0niwrtd0m5z/Wuling_Power_Corporation.esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="Viettel Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="VIETTEL GROUP" class="thumb" />
         <div class="title">VIETTEL GROUP</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/pn69uuh3i2z40em/VIETTEL_GROUP.esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/pn69uuh3i2z40em/VIETTEL_GROUP.esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="Vietnam Joint Bank Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE" class="thumb" />
         <div class="title">VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/hw4ei5ckmu0fxwq/VIETNAM_JOINT_STOCK_COMMERCIAL_BANK_FOR_INDUSTRY_AND_TRADE.esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/hw4ei5ckmu0fxwq/VIETNAM_JOINT_STOCK_COMMERCIAL_BANK_FOR_INDUSTRY_AND_TRADE.esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="TCL Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="TCL household Appliance Marketing Co., LTD" class="thumb" />
         <div class="title">TCL household Appliance Marketing Co., LTD</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/tcg8hgk617tywah/TCL_household_Appliance_Marketing_Co.%252C_LTD.esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/tcg8hgk617tywah/TCL_household_Appliance_Marketing_Co.%252C_LTD.esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="NREH Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD." class="thumb" />
         <div class="title">NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD.</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/fv7tkvakazkfzg3/NREH_ESTATE_INFORMATION_TECHNOLOGY_CO.%252CLTD..esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/fv7tkvakazkfzg3/NREH_ESTATE_INFORMATION_TECHNOLOGY_CO.%252CLTD..esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="GAC Toyota Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="GAC TOYOTA MOTOR CO.,LTD" class="thumb" />
         <div class="title">GAC TOYOTA MOTOR CO.,LTD</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/v6l38xe18p2xeta/GAC_TOYOTA_MOTOR_CO.%252CLTD.esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/v6l38xe18p2xeta/GAC_TOYOTA_MOTOR_CO.%252CLTD.esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="EEO Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="EEO Education Ltd." class="thumb" />
         <div class="title">EEO Education Ltd.</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/we386090k7pyap5/EEO_Education_Ltd..esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/we386090k7pyap5/EEO_Education_Ltd..esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="Chiba Institute Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="CHIBA INSTITUTE OF TECHNOLOGY" class="thumb" />
         <div class="title">CHIBA INSTITUTE OF TECHNOLOGY</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/1d8t830d0ep2vma/CHIBA_INSTITUTE_OF_TECHNOLOGY.esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/1d8t830d0ep2vma/CHIBA_INSTITUTE_OF_TECHNOLOGY.esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="China Railway Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="China Railway Eryuan Engineering Group Co., Ltd." class="thumb" />
         <div class="title">China Railway Eryuan Engineering Group Co., Ltd.</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/x9b7tc13v7qr4c6/China_Railway_Eryuan_Engineering_Group_Co.%252C_Ltd..esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/x9b7tc13v7qr4c6/China_Railway_Eryuan_Engineering_Group_Co.%252C_Ltd..esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="BMW Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="BMW Brilliance Automotive Ltd." class="thumb" />
         <div class="title">BMW Brilliance Automotive Ltd.</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/e0zl0rh76xcbiec/BMW_Brilliance_Automotive_Ltd..esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/e0zl0rh76xcbiec/BMW_Brilliance_Automotive_Ltd..esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
 
-      <div class="card">
-        <img class="thumb" src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="Beijing Esensoft Cert">
+      <article class="card">
+        <img src="https://static.vecteezy.com/system/resources/previews/008/216/592/non_2x/certificate-of-completion-rgb-color-icon-professional-achievement-award-course-student-diploma-isolated-illustration-simple-filled-line-drawing-editable-stroke-vector.jpg" alt="Beijing Esensoft Co., Ltd." class="thumb" />
         <div class="title">Beijing Esensoft Co., Ltd.</div>
-        <div class="sub">Mediafire .esigncert</div>
-        <a class="get-btn" href="https://www.mediafire.com/file/hb4uadfjijs84b7/Beijing_Esensoft_Co.%252C_Ltd..esigncert/file" target="_blank" rel="noopener">Get</a>
-      </div>
+        <a href="https://www.mediafire.com/file/hb4uadfjijs84b7/Beijing_Esensoft_Co.%252C_Ltd..esigncert/file" target="_blank" rel="noopener noreferrer" class="get-btn">Get</a>
+      </article>
+
     </div>
   </section>
-
-  <hr class="sep">
-
-  <div style="text-align:center;color:#888;font-size:13px;margin:18px 0">
-    <div class="note">All entries filled with the exact links you provided. Open links on device/browser you trust.</div>
-  </div>
 
 </main>
+
+<footer style="text-align:center; padding:14px 0; background:#111; border-top:1px solid #222; font-size:0.9rem; color:#666;">
+  © 2025 Meteorz
+</footer>
 
 </body>
 </html>
