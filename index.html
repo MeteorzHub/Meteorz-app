@@ -6,76 +6,118 @@
 <title>Meteorz - Sideloading</title>
 <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         background-color: #000;
         color: #fff;
         margin: 0;
         padding: 0;
     }
+
+    /* Tabs Navigation */
     .tabs {
         display: flex;
         background: #111;
         padding: 10px;
-        border-bottom: 2px solid #fff;
+        border-bottom: 2px solid #222;
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
     .tab {
-        padding: 10px 20px;
+        padding: 12px 20px;
         cursor: pointer;
-        background: #222;
+        background: transparent;
         margin-right: 5px;
-        border-radius: 5px 5px 0 0;
-        color: #fff;
+        border-radius: 8px;
+        color: #aaa;
+        transition: 0.2s;
+        font-weight: 500;
     }
     .tab.active {
         background: #fff;
         color: #000;
         font-weight: bold;
     }
+    .tab:hover {
+        background: #222;
+        color: #fff;
+    }
+
+    /* Content Sections */
     .content {
         display: none;
         padding: 20px;
+        animation: fadeIn 0.3s ease-in-out;
     }
     .content.active {
         display: block;
     }
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+
+    /* Section Headers */
+    h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+        border-left: 5px solid #fff;
+        padding-left: 10px;
+    }
+
+    /* App Cards */
     .section {
-        margin-bottom: 30px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
     }
     .card {
         background: #111;
         padding: 15px;
-        margin-bottom: 10px;
-        border: 1px solid #444;
-        border-radius: 10px;
+        border-radius: 20px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 15px;
+        transition: 0.2s;
+    }
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.5);
     }
     .card img {
-        width: 50px;
-        height: 50px;
-        border-radius: 5px;
-        margin-right: 10px;
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        object-fit: cover;
     }
     .info {
         flex: 1;
-        margin-left: 10px;
     }
     .info h3 {
         margin: 0;
         font-size: 16px;
+        font-weight: 600;
     }
     .info p {
         margin: 2px 0;
-        font-size: 14px;
+        font-size: 13px;
+        color: #aaa;
     }
+
+    /* Get Button (iOS Style) */
     .get-btn {
         background: #fff;
         color: #000;
-        padding: 5px 15px;
-        border-radius: 5px;
+        padding: 6px 15px;
+        border-radius: 20px;
         text-decoration: none;
-        font-weight: bold;
+        font-weight: 600;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+    .get-btn:hover {
+        background: #ddd;
     }
 </style>
 </head>
@@ -86,99 +128,224 @@
     <div class="tab" onclick="showTab(1)">Direct Installs</div>
     <div class="tab" onclick="showTab(2)">Tab 3</div>
     <div class="tab" onclick="showTab(3)">Tab 4</div>
-</div>
+</div><!-- 2/2 — Content sections (DNS + Direct Installs) + scripts -->
+<!-- Paste this below the .tabs div from 1/2 -->
 
+<!-- DNS CONTENT -->
 <div class="content active" id="tab0">
     <h2>DNS</h2>
     <div class="section">
+        <!-- Qstatic DNS -->
         <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Qstatic">
             <div class="info">
                 <h3>Qstatic DNS</h3>
                 <p>11/10 Success</p>
             </div>
-            <a href="https://github.com/char843vvv/qstaticdns/releases/download/dns/qstaticdns.mobileconfig" class="get-btn">Get</a>
+            <a class="get-btn" href="https://github.com/char843vvv/qstaticdns/releases/download/dns/qstaticdns.mobileconfig" target="_blank" rel="noopener">Get</a>
         </div>
+
+        <!-- Khoindvn -->
         <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Khoindvn">
             <div class="info">
                 <h3>Khoindvn</h3>
                 <p>10/10 Success</p>
             </div>
-            <a href="https://github.com/khoindvnDNS/iOS/raw/main/DNS/khoindns.mobileconfig" class="get-btn">Get</a>
+            <a class="get-btn" href="https://github.com/khoindvnDNS/iOS/raw/main/DNS/khoindns.mobileconfig" target="_blank" rel="noopener">Get</a>
         </div>
+
+        <!-- Khomod DNS -->
         <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Khomod">
             <div class="info">
                 <h3>Khomod DNS</h3>
                 <p>11/10 Success</p>
             </div>
-            <a href="https://raw.githubusercontent.com/toasty-dev/Khomod/refs/heads/main/khomodver2.mobileconfig" class="get-btn">Get</a>
+            <a class="get-btn" href="https://raw.githubusercontent.com/toasty-dev/Khomod/refs/heads/main/khomodver2.mobileconfig" target="_blank" rel="noopener">Get</a>
         </div>
+
+        <!-- Anti Revoke -->
         <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Anti Revoke">
             <div class="info">
                 <h3>Anti Revoke DNS</h3>
                 <p>10/10 Success</p>
             </div>
-            <a href="https://github.com/toasty-dev/Khomod/raw/7401ca4719c9080a96ee902f800ebf009f08912b/khomod.mobileconfig" class="get-btn">Get</a>
+            <a class="get-btn" href="https://github.com/toasty-dev/Khomod/raw/7401ca4719c9080a96ee902f800ebf009f08912b/khomod.mobileconfig" target="_blank" rel="noopener">Get</a>
         </div>
+
+        <!-- CLS DNS -->
         <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="CLS">
             <div class="info">
                 <h3>CLS DNS</h3>
                 <p>10/10 Success</p>
             </div>
-            <a href="https://cdn.discordapp.com/attachments/1195472555071516775/1278801685476540466/CSLdns.mobileconfig" class="get-btn">Get</a>
+            <a class="get-btn" href="https://cdn.discordapp.com/attachments/1195472555071516775/1278801685476540466/CSLdns.mobileconfig" target="_blank" rel="noopener">Get</a>
         </div>
+
+        <!-- Spartan DNS -->
         <div class="card">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s" alt="Spartan">
             <div class="info">
                 <h3>Spartan DNS</h3>
                 <p>9/10 Success</p>
             </div>
-            <a href="https://raw.githubusercontent.com/geololll/VyperHub/main/VyperHubs.mobileconfig" class="get-btn">Get</a>
+            <a class="get-btn" href="https://raw.githubusercontent.com/geololll/VyperHub/main/VyperHubs.mobileconfig" target="_blank" rel="noopener">Get</a>
         </div>
     </div>
 </div>
 
+<!-- DIRECT INSTALLS CONTENT -->
 <div class="content" id="tab1">
     <h2>Direct Installs</h2>
     <div class="section">
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>Esign China Zheshang Bank Co., Ltd.zip</h3><p>Live ✅️</p></div><a href="https://sign.applep12.com/Install/689bfa36-61f1-9501-00ec-f1704ddf2d06" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - GAC TOYOTA MOTOR CO.,LTD</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/55ZWv8OZ" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - Wuling Power Corporation</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/zBXxhRoc" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - TCL household Appliance Marketing Co., LTD</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/pokXH5G4" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - China Railway Eryuan Engineering Group Co., Ltd</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/TM5Ye1O1" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - EEO Education ltd</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/Rod6cWdW" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/ZQgRwTtA" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>Esign - Beijing Esensoft Co., Ltd</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/8FnyqEjs" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>Esign chiba</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/NRqDTAah" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - VIETTEL GROUP</h3><p>Revoked use DNS</p></div><a href="#" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</h3></div><a href="https://loadly.io/vnjes8ios" class="get-btn">Get</a></div>
-        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - BMW Brilliance Automotive Ltd</h3></div><a href="https://loadly.io/KDxT6fCO" class="get-btn">Get</a></div>
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Esign China Zheshang">
+            <div class="info">
+                <h3>Esign — China Zheshang Bank Co., Ltd.zip</h3>
+                <p>Live ✅️</p>
+            </div>
+            <a class="get-btn" href="https://sign.applep12.com/Install/689bfa36-61f1-9501-00ec-f1704ddf2d06" target="_blank" rel="noopener">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="GAC Toyota">
+            <div class="info">
+                <h3>ESign — GAC TOYOTA MOTOR CO., LTD</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="https://loadly.io/55ZWv8OZ" target="_blank" rel="noopener">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Wuling">
+            <div class="info">
+                <h3>ESign — Wuling Power Corporation</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="https://loadly.io/zBXxhRoc" target="_blank" rel="noopener">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="TCL">
+            <div class="info">
+                <h3>ESign — TCL Household Appliance Marketing Co., LTD</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="https://loadly.io/pokXH5G4" target="_blank" rel="noopener">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="China Railway">
+            <div class="info">
+                <h3>ESign — China Railway Eryuan Engineering Group Co., Ltd</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="https://loadly.io/TM5Ye1O1" target="_blank" rel="noopener">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="EEO Education">
+            <div class="info">
+                <h3>ESign — EEO Education Ltd</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="https://loadly.io/Rod6cWdW" target="_blank" rel="noopener">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="NREH">
+            <div class="info">
+                <h3>ESign — NREH ESTATE INFORMATION TECHNOLOGY CO., LTD</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="https://loadly.io/ZQgRwTtA" target="_blank" rel="noopener">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Beijing Esensoft">
+            <div class="info">
+                <h3>Esign — Beijing Esensoft Co., Ltd</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="https://loadly.io/8FnyqEjs" target="_blank" rel="noopener">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Esign Chiba">
+            <div class="info">
+                <h3>Esign — Chiba</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="https://loadly.io/NRqDTAah" target="_blank" rel="noopener">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Viettel">
+            <div class="info">
+                <h3>ESign — VIETTEL GROUP</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="#" onclick="alert('No direct link provided — use DNS for this one.');">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="Vietnam Bank">
+            <div class="info">
+                <h3>ESign — VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="https://loadly.io/vnjes8ios" target="_blank" rel="noopener">Get</a>
+        </div>
+
+        <div class="card">
+            <img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg" alt="BMW Brilliance">
+            <div class="info">
+                <h3>ESign — BMW Brilliance Automotive Ltd</h3>
+                <p>Revoked — use DNS</p>
+            </div>
+            <a class="get-btn" href="https://loadly.io/KDxT6fCO" target="_blank" rel="noopener">Get</a>
+        </div>
     </div>
 </div>
 
+<!-- TAB 3 + TAB 4 placeholders -->
 <div class="content" id="tab2">
     <h2>Tab 3</h2>
-    <p>Content coming soon...</p>
+    <p style="color:#aaa">Add custom content here — categories, news, or featured installs.</p>
 </div>
 
 <div class="content" id="tab3">
     <h2>Tab 4</h2>
-    <p>Content coming soon...</p>
+    <p style="color:#aaa">Add custom content here — e.g., About, Guides, or Contact.</p>
 </div>
 
+<!-- SCRIPTS -->
 <script>
+    // Tab switching
     function showTab(index) {
-        let tabs = document.querySelectorAll('.tab');
-        let contents = document.querySelectorAll('.content');
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.content');
         tabs.forEach((tab, i) => {
             tab.classList.toggle('active', i === index);
             contents[i].classList.toggle('active', i === index);
         });
+        // smooth scroll to top of content on mobile
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    // Optional: keyboard left/right to switch tabs
+    document.addEventListener('keydown', (e) => {
+        const tabs = Array.from(document.querySelectorAll('.tab'));
+        const activeIndex = tabs.findIndex(t => t.classList.contains('active'));
+        if (e.key === 'ArrowRight') {
+            showTab((activeIndex + 1) % tabs.length);
+        } else if (e.key === 'ArrowLeft') {
+            showTab((activeIndex - 1 + tabs.length) % tabs.length);
+        }
+    });
 </script>
 
 </body>
