@@ -6,258 +6,179 @@
 <title>Meteorz - Sideloading</title>
 <style>
     body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
         margin: 0;
-        font-family: 'Segoe UI', sans-serif;
-        background: black;
-        color: white;
-        overflow-x: hidden;
+        padding: 0;
     }
-
-    /* Landing Screen */
-    #landing {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        background: linear-gradient(180deg, #000, #111);
-        animation: fadeIn 1s ease;
-    }
-    #landing h1 {
-        font-size: 3em;
-        letter-spacing: 3px;
-        margin-bottom: 15px;
-        text-shadow: 0 0 10px white;
-    }
-    #landing p {
-        color: #ccc;
-        font-size: 1.2em;
-        max-width: 500px;
-        margin-bottom: 40px;
-    }
-    .start-btn {
-        background: white;
-        color: black;
-        padding: 14px 35px;
-        border-radius: 8px;
-        font-size: 1.2em;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border: none;
-    }
-    .start-btn:hover {
-        background: #ccc;
-        transform: scale(1.05);
-    }
-
-    /* Tabs */
     .tabs {
         display: flex;
         background: #111;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        padding: 10px;
+        border-bottom: 2px solid #fff;
     }
     .tab {
-        flex: 1;
-        text-align: center;
-        padding: 15px;
+        padding: 10px 20px;
         cursor: pointer;
-        transition: background 0.3s, transform 0.2s;
+        background: #222;
+        margin-right: 5px;
+        border-radius: 5px 5px 0 0;
+        color: #fff;
     }
     .tab.active {
-        background: #222;
+        background: #fff;
+        color: #000;
         font-weight: bold;
     }
-    .tab:hover {
-        background: #333;
-        transform: scale(1.03);
-    }
-
-    /* Content */
-    .tab-content {
+    .content {
         display: none;
         padding: 20px;
     }
-    .tab-content.active {
+    .content.active {
         display: block;
-        animation: slideUp 0.5s ease;
     }
-
-    /* DNS Cards */
-    .dns-card {
+    .section {
+        margin-bottom: 30px;
+    }
+    .card {
+        background: #111;
+        padding: 15px;
+        margin-bottom: 10px;
+        border: 1px solid #444;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: #111;
-        border: 1px solid #333;
-        border-radius: 12px;
-        padding: 12px;
-        margin-bottom: 15px;
-        transition: all 0.3s ease;
-        transform: scale(0.98);
-        opacity: 0;
-        animation: fadeInCard 0.5s ease forwards;
     }
-    .dns-card:hover {
-        transform: scale(1.02);
-        box-shadow: 0 0 15px rgba(255,255,255,0.2);
+    .card img {
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        margin-right: 10px;
     }
-    .dns-info {
-        display: flex;
-        align-items: center;
+    .info {
+        flex: 1;
+        margin-left: 10px;
     }
-    .dns-info img {
-        width: 60px;
-        height: 60px;
-        border-radius: 10px;
-        margin-right: 15px;
-        border: 2px solid #444;
-    }
-    .dns-text h3 {
+    .info h3 {
         margin: 0;
         font-size: 16px;
     }
-    .dns-text p {
-        margin: 0;
-        color: #aaa;
+    .info p {
+        margin: 2px 0;
         font-size: 14px;
     }
     .get-btn {
-        background: white;
-        color: black;
-        padding: 8px 16px;
+        background: #fff;
+        color: #000;
+        padding: 5px 15px;
+        border-radius: 5px;
         text-decoration: none;
-        border-radius: 6px;
         font-weight: bold;
-        transition: all 0.3s ease;
-    }
-    .get-btn:hover {
-        background: #ccc;
-        transform: scale(1.05);
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    @keyframes slideUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInCard {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
     }
 </style>
 </head>
 <body>
 
-<!-- Landing Page -->
-<div id="landing">
-    <h1>METEORZ</h1>
-    <p>The ultimate futuristic sideloading hub for iOS.  
-    Access DNS, certificates, and apps in one clean, lightning-fast platform.</p>
-    <button class="start-btn" onclick="startSite()">Get Started</button>
+<div class="tabs">
+    <div class="tab active" onclick="showTab(0)">DNS</div>
+    <div class="tab" onclick="showTab(1)">Direct Installs</div>
+    <div class="tab" onclick="showTab(2)">Tab 3</div>
+    <div class="tab" onclick="showTab(3)">Tab 4</div>
 </div>
 
-<!-- Main Content -->
-<div id="main" style="display:none;">
-    <div class="tabs">
-        <div class="tab active" onclick="openTab(event, 'dns')">DNS</div>
-        <div class="tab" onclick="openTab(event, 'certs')">Certificates</div>
-        <div class="tab" onclick="openTab(event, 'apps')">Apps</div>
-        <div class="tab" onclick="openTab(event, 'info')">Info</div>
-    </div>
-
-    <!-- DNS Tab -->
-    <div id="dns" class="tab-content active">
-        <div class="dns-card" style="animation-delay: 0.1s;">
-            <div class="dns-info">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
-                <div class="dns-text">
-                    <h3>Qstatic DNS</h3>
-                    <p>11/10 Success</p>
-                </div>
+<div class="content active" id="tab0">
+    <h2>DNS</h2>
+    <div class="section">
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="info">
+                <h3>Qstatic DNS</h3>
+                <p>11/10 Success</p>
             </div>
-            <a class="get-btn" href="https://github.com/char843vvv/qstaticdns/releases/download/dns/qstaticdns.mobileconfig">Get</a>
+            <a href="https://github.com/char843vvv/qstaticdns/releases/download/dns/qstaticdns.mobileconfig" class="get-btn">Get</a>
         </div>
-
-        <div class="dns-card" style="animation-delay: 0.2s;">
-            <div class="dns-info">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
-                <div class="dns-text">
-                    <h3>Khoindvn</h3>
-                    <p>10/10 Success</p>
-                </div>
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="info">
+                <h3>Khoindvn</h3>
+                <p>10/10 Success</p>
             </div>
-            <a class="get-btn" href="https://github.com/khoindvnDNS/iOS/raw/main/DNS/khoindns.mobileconfig">Get</a>
+            <a href="https://github.com/khoindvnDNS/iOS/raw/main/DNS/khoindns.mobileconfig" class="get-btn">Get</a>
         </div>
-
-        <div class="dns-card" style="animation-delay: 0.3s;">
-            <div class="dns-info">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
-                <div class="dns-text">
-                    <h3>Khomod DNS</h3>
-                    <p>11/10 Success</p>
-                </div>
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="info">
+                <h3>Khomod DNS</h3>
+                <p>11/10 Success</p>
             </div>
-            <a class="get-btn" href="https://raw.githubusercontent.com/toasty-dev/Khomod/refs/heads/main/khomodver2.mobileconfig">Get</a>
+            <a href="https://raw.githubusercontent.com/toasty-dev/Khomod/refs/heads/main/khomodver2.mobileconfig" class="get-btn">Get</a>
         </div>
-
-        <div class="dns-card" style="animation-delay: 0.4s;">
-            <div class="dns-info">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
-                <div class="dns-text">
-                    <h3>Anti Revoke DNS</h3>
-                    <p>10/10 Success</p>
-                </div>
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="info">
+                <h3>Anti Revoke DNS</h3>
+                <p>10/10 Success</p>
             </div>
-            <a class="get-btn" href="https://github.com/toasty-dev/Khomod/raw/7401ca4719c9080a96ee902f800ebf009f08912b/khomod.mobileconfig">Get</a>
+            <a href="https://github.com/toasty-dev/Khomod/raw/7401ca4719c9080a96ee902f800ebf009f08912b/khomod.mobileconfig" class="get-btn">Get</a>
         </div>
-
-        <div class="dns-card" style="animation-delay: 0.5s;">
-            <div class="dns-info">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
-                <div class="dns-text">
-                    <h3>CLS DNS</h3>
-                    <p>10/10 Success</p>
-                </div>
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="info">
+                <h3>CLS DNS</h3>
+                <p>10/10 Success</p>
             </div>
-            <a class="get-btn" href="https://cdn.discordapp.com/attachments/1195472555071516775/1278801685476540466/CSLdns.mobileconfig">Get</a>
+            <a href="https://cdn.discordapp.com/attachments/1195472555071516775/1278801685476540466/CSLdns.mobileconfig" class="get-btn">Get</a>
         </div>
-
-        <div class="dns-card" style="animation-delay: 0.6s;">
-            <div class="dns-info">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
-                <div class="dns-text">
-                    <h3>Spartan DNS</h3>
-                    <p>9/10 Success</p>
-                </div>
+        <div class="card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEpLSWrOJ7D7yGw38Lv8Oyv33X-yIPqTlOUQ&s">
+            <div class="info">
+                <h3>Spartan DNS</h3>
+                <p>9/10 Success</p>
             </div>
-            <a class="get-btn" href="https://raw.githubusercontent.com/geololll/VyperHub/main/VyperHubs.mobileconfig">Get</a>
+            <a href="https://raw.githubusercontent.com/geololll/VyperHub/main/VyperHubs.mobileconfig" class="get-btn">Get</a>
         </div>
     </div>
+</div>
 
-    <!-- Placeholder tabs -->
-    <div id="certs" class="tab-content"><h2>Certificates</h2></div>
-    <div id="apps" class="tab-content"><h2>Apps</h2></div>
-    <div id="info" class="tab-content"><h2>Info</h2></div>
+<div class="content" id="tab1">
+    <h2>Direct Installs</h2>
+    <div class="section">
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>Esign China Zheshang Bank Co., Ltd.zip</h3><p>Live ✅️</p></div><a href="https://sign.applep12.com/Install/689bfa36-61f1-9501-00ec-f1704ddf2d06" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - GAC TOYOTA MOTOR CO.,LTD</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/55ZWv8OZ" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - Wuling Power Corporation</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/zBXxhRoc" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - TCL household Appliance Marketing Co., LTD</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/pokXH5G4" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - China Railway Eryuan Engineering Group Co., Ltd</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/TM5Ye1O1" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - EEO Education ltd</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/Rod6cWdW" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - NREH ESTATE INFORMATION TECHNOLOGY CO.,LTD</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/ZQgRwTtA" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>Esign - Beijing Esensoft Co., Ltd</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/8FnyqEjs" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>Esign chiba</h3><p>Revoked use DNS</p></div><a href="https://loadly.io/NRqDTAah" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - VIETTEL GROUP</h3><p>Revoked use DNS</p></div><a href="#" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE</h3></div><a href="https://loadly.io/vnjes8ios" class="get-btn">Get</a></div>
+        <div class="card"><img src="https://ipaomtk.com/wp-content/uploads/2023/03/esign-ipa.jpg"><div class="info"><h3>ESign - BMW Brilliance Automotive Ltd</h3></div><a href="https://loadly.io/KDxT6fCO" class="get-btn">Get</a></div>
+    </div>
+</div>
+
+<div class="content" id="tab2">
+    <h2>Tab 3</h2>
+    <p>Content coming soon...</p>
+</div>
+
+<div class="content" id="tab3">
+    <h2>Tab 4</h2>
+    <p>Content coming soon...</p>
 </div>
 
 <script>
-function startSite() {
-    document.getElementById("landing").style.display = "none";
-    document.getElementById("main").style.display = "block";
-}
-
-function openTab(evt, tabId) {
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    evt.currentTarget.classList.add('active');
-}
+    function showTab(index) {
+        let tabs = document.querySelectorAll('.tab');
+        let contents = document.querySelectorAll('.content');
+        tabs.forEach((tab, i) => {
+            tab.classList.toggle('active', i === index);
+            contents[i].classList.toggle('active', i === index);
+        });
+    }
 </script>
 
 </body>
